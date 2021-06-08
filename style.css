@@ -3,6 +3,7 @@
     --Primary-Desaturated-Dark-Blue: hsl(214, 17%, 51%);
     --Primary-Grayish-Blue: hsl(212, 23%, 69%);
     --Primary-Light-Grayish-Blue: hsl(210, 46%, 95%);
+    --Primary-Share-colour: #48556a;
 }
 
 * {
@@ -28,6 +29,7 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
 
+    /* width: 800px; */
     width: 60%;
     margin: 0 auto;
 
@@ -71,127 +73,117 @@ p {
 }
 
 .person-details {
-    display: flex;
     margin-top: 1.5rem;
-    min-height: 5vh;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "avatar avatar-name avatar-name . share-icons"
+        "avatar date date . share-icons";
 }
 
 .avatar {
-    min-height: 40px;
-    min-width: 40px;
+    grid-area: avatar;
+    height: 42px;
+    width: 42px;
     background: url("images/avatar-michelle.jpg");
-    background-repeat: no-repeat;
     background-size: contain;
-    border-radius: 20px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .avatar-name {
-    min-width: fit-content;
-    flex-grow: 2;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    grid-area: avatar-name;
     font-weight: 800;
 }
 
 .date {
+    grid-area: date;
     opacity: 0.3;
-    padding-top: 0.4rem;
 }
 
-.share-icons {
-    min-width: fit-content;
-    width: 25px;
-    height: 25px;
-    flex-grow: 0;
-    background-color: var(--Primary-Light-Grayish-Blue);
-    border-radius: 20px;
-    text-align: center;
+.icon {
+    grid-area: share-icons;
+    width: 30px;
+    height: 30px;
+    background: #e6e7ed;
+    border-radius: 50%;
+    background-image: url("images/icon-share.svg");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    justify-self: end;
+    outline: 0;
+    border: 0;
+}
 
+.icon:hover {
+    background-color: darkgray;
+}
+
+.clip-me::before {
+    content: "";
+    height: 10px;
+    width: 10px;
     position: relative;
-}
-
-.share-icons img {
-    margin-top: 0.4rem;
+    top: 26px;
+    left: 120px;
+    transform: rotate(45deg);
+    background-color: var(--Primary-Very-Dark-Grayish-Blue);
+    z-index: -1; /* send behind the main clip-me */
 }
 
 .clip-me {
     display: none;
-    width: 50%;
-    /* border: 3px solid red; */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 10px;
+    grid-template-areas: ". shareText shareText facebook twitter pinterest .";
+    height: 3.4rem;
+    width: 15.5rem;
     position: absolute;
-    bottom: 100px;
-    right: -115px;
-}
-.top-half {
-    border-radius: 10px;
+    top: 10rem;
+    right: -3.7rem;
+    border-radius: 8px;
     background-color: var(--Primary-Very-Dark-Grayish-Blue);
-    height: 40px;
-    /* clip-path: polygon(
-        0% 0%,
-        100% 0%,
-        100% 75%,
-        63% 75%,
-        50% 100%,
-        37% 75%,
-        0% 75%
-    ); */
+    align-items: center;
+
+    z-index: 1; /* bring to front*/
 }
 
-.icon-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex: 0 1 auto;
-}
-
-.icon1 {
-    margin-left: 1rem;
-    text-align: center;
-    padding-top: 0.3rem;
-    margin-top: 0.3em;
-    height: 30px;
-    width: 80px;
-    /* border: 3px solid red; */
-}
-
-.share-text {
+.shareText {
+    grid-area: shareText;
     color: var(--Primary-Desaturated-Dark-Blue);
-    font-size: 1rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2rem;
 }
 
-.icon2 {
-    margin-top: 0.3rem;
-    height: 30px;
-    width: 30px;
-    /* border: 3px solid red; */
+.facebook {
+    grid-area: facebook;
     background-image: url("images/icon-facebook.svg");
-    background-size: 100% 100%;
-}
-
-.icon3 {
-    margin-top: 0.3rem;
-    height: 30px;
-    width: 30px;
-    /* border: 3px solid red; */
-    background-image: url("images/icon-twitter.svg");
-    background-size: 100% 100%;
-}
-
-.icon4 {
-    margin-top: 0.3rem;
-    height: 30px;
-    width: 30px;
-    /* border: 3px solid red; */
-    background-image: url("images/icon-pinterest.svg");
-    background-size: 100% 100%;
-}
-.bottom-half {
     height: 20px;
-    background-color: var(--Primary-Very-Dark-Grayish-Blue);
-    clip-path: polygon(50% 100%, 40% 0, 60% 0);
+    width: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.twitter {
+    grid-area: twitter;
+    background-image: url("images/icon-twitter.svg");
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.pinterest {
+    grid-area: pinterest;
+    background-image: url("images/icon-pinterest.svg");
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 @media screen and (max-width: 800px) {
@@ -215,36 +207,16 @@ p {
         font-weight: 900;
     }
 
-    .person-details {
-        display: flex;
-        margin-top: 1.5rem;
-        min-height: 10vh;
-        justify-content: space-between;
-        align-items: flex-start;
+    .footer {
     }
 
-    .avatar {
-        min-height: 50px;
-        min-width: 50px;
-    }
-
-    .avatar-name {
-        font-size: 1rem;
-        color: var(--Primary-Very-Dark-Grayish-Blue);
-    }
-
-    .date {
-        opacity: 0.3;
-        padding-top: 0.4rem;
-    }
-
-    .share-icons {
-        width: 40px;
-        height: 40px;
-        background-color: var(--Primary-Light-Grayish-Blue);
-    }
-
-    .share-icons img {
-        margin-top: 0.7rem;
+    .clip-me {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 10px;
+        grid-template-areas: ". shareText shareText facebook twitter pinterest .";
+        width: 100%;
+        position: static;
     }
 }
