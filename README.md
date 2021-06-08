@@ -42,9 +42,7 @@ Users should be able to:
 -   CSS custom properties
 -   Flexbox
 -   CSS Grid
--   JS
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+-   JS (for the Share Icon popups)
 
 ### What I learned
 
